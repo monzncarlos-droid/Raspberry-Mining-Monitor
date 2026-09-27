@@ -36,8 +36,9 @@ downstream can reach back to a miner.
   `/api/system/info` in mV/mA versus NerdQAxe's nested `/api/v2/dashboard` in
   V/A) and normalises both to TH/s, volts and amps. GET only; there is no write
   path to a miner anywhere in the codebase.
-- **`pool`**, **`pool/publicpool`** — the pool adapter and the Public Pool
-  client (one query per payout address; hashrate in H/s converted to TH/s).
+- **`pool`**, **`pool/publicpool`**, **`pool/btcpowlab`** — the provider router
+  and pool clients. Public Pool and BTC PoW Lab are queried once per payout
+  address, with hashrate converted from H/s to TH/s.
 - **`bitcoin`**, **`bitcoin/mempool`** — the provider interface and the
   mempool.space client (tip height, network hashrate, difficulty retarget,
   BTC/EUR price). The block subsidy is computed locally from height, not

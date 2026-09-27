@@ -8,6 +8,7 @@ const (
 	KeyPublicPool = "publicpool"
 	KeyCKPool     = "ckpool"
 	KeyBraiins    = "braiins"
+	KeyBTCPoWLab  = "btcpowlab"
 	KeyGeneric    = "generic"
 )
 
@@ -28,6 +29,8 @@ func Detect(stratumURL string) string {
 		return KeyCKPool
 	case strings.HasSuffix(host, "braiins.com"):
 		return KeyBraiins
+	case strings.HasSuffix(host, "btcpowlab-pool.com"):
+		return KeyBTCPoWLab
 	default:
 		return KeyGeneric
 	}

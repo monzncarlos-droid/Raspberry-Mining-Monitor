@@ -12,6 +12,8 @@ func TestDetectMapsStratumHostToProvider(t *testing.T) {
 		{"solo.ckpool.org:3333", KeyCKPool},
 		{"eusolo.ckpool.org", KeyCKPool},
 		{"stratum+tcp://stratum.braiins.com:3333", KeyBraiins},
+		{"stratum+tcp://stratum.btcpowlab-pool.com:3333", KeyBTCPoWLab},
+		{"stratum.btcpowlab-pool.com", KeyBTCPoWLab},
 		{"my-node.local:3333", KeyGeneric},
 		{"192.168.1.10:3333", KeyGeneric},
 		{"", KeyGeneric},

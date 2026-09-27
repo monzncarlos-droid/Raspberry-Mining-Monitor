@@ -37,6 +37,7 @@ import (
 	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/minercfg"
 	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/pool"
 	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/pool/braiins"
+	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/pool/btcpowlab"
 	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/pool/ckpool"
 	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/pool/publicpool"
 	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/push"
@@ -404,8 +405,8 @@ func recordHistory(ctx context.Context, hist *history.Store, store *state.Store,
 
 // seedSpecs converts the loaded config's miners into editable specs for the
 // first-run seed of the miner config store.
-// buildRouter wires the provider-agnostic pool router: publicpool, ckpool and
-// the generic telemetry fallback always, plus braiins when a token is set. Each
+// buildRouter wires the provider-agnostic pool router: publicpool, ckpool,
+// BTC PoW Lab and the generic telemetry fallback always, plus braiins when a token is set. Each
 // miner is routed by its explicit override, the global default, or (when the
 // default is "auto") detection from its stratum host.
 func buildRouter(cfg config.Config, specs []minercfg.Spec, prov minercfg.Providers) pool.Fetcher {
@@ -432,6 +433,7 @@ func buildRouter(cfg config.Config, specs []minercfg.Spec, prov minercfg.Provide
 	providers := map[string]pool.Provider{
 		pool.KeyPublicPool: publicpool.New(publicpool.Config{BaseURL: prov.PoolBaseURL, Timeout: cfg.Pool.Timeout}),
 		pool.KeyCKPool:     ckpool.New(ckpool.Config{Timeout: cfg.Pool.Timeout}),
+		pool.KeyBTCPoWLab:  btcpowlab.New(btcpowlab.Config{Timeout: cfg.Pool.Timeout}),
 		pool.KeyGeneric:    pool.NewGeneric(),
 	}
 	if cfg.Pool.Token != "" {
