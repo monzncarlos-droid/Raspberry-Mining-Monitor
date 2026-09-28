@@ -37,6 +37,7 @@ import (
 	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/minercfg"
 	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/pool"
 	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/pool/braiins"
+	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/pool/btcpowlab"
 	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/pool/ckpool"
 	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/pool/publicpool"
 	"github.com/YorkStack/Raspberry-Mining-Monitor/internal/push"
@@ -432,6 +433,7 @@ func buildRouter(cfg config.Config, specs []minercfg.Spec, prov minercfg.Provide
 	providers := map[string]pool.Provider{
 		pool.KeyPublicPool: publicpool.New(publicpool.Config{BaseURL: prov.PoolBaseURL, Timeout: cfg.Pool.Timeout}),
 		pool.KeyCKPool:     ckpool.New(ckpool.Config{Timeout: cfg.Pool.Timeout}),
+		pool.KeyBTCPoWLab:  btcpowlab.New(btcpowlab.Config{Timeout: cfg.Pool.Timeout}),
 		pool.KeyGeneric:    pool.NewGeneric(),
 	}
 	if cfg.Pool.Token != "" {

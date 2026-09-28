@@ -23,7 +23,7 @@ miners:
     interval: 2s
     timeout: 2s
     # Optional: force this miner's pool provider instead of auto-detecting it.
-    # pool_provider: ckpool   # publicpool | ckpool | braiins | generic | auto
+    # pool_provider: ckpool   # publicpool | ckpool | braiins | btcpowlab | generic | auto
 
   # A miner behind the LAN monitoring security contract (e.g. the Mac metal
   # miner) requires a Bearer token. It is sent as "Authorization: Bearer TOKEN"
@@ -52,6 +52,7 @@ bitcoin:
 #   publicpool  public-pool.io
 #   ckpool      solo.ckpool.org (and regional mirrors)
 #   braiins     Braiins Pool (needs a token, see below)
+#   btcpowlab   BTC PoW Lab Hybrid Solo
 #   generic     derive stats from each miner's own telemetry, no external API
 #   none        no pool panel
 #   demo        simulated

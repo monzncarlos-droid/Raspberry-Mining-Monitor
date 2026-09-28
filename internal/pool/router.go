@@ -24,6 +24,7 @@ var externalNeedsAddress = map[string]bool{
 	KeyPublicPool: true,
 	KeyCKPool:     true,
 	KeyBraiins:    true,
+	KeyBTCPoWLab:  true,
 }
 
 // Router groups miners by their detected or overridden provider and merges the

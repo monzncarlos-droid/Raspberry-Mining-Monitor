@@ -35,7 +35,7 @@ miners:
 `host` is the miner's own web UI address, reachable from the Pi. `type: axeos`
 covers both upstream Bitaxe and NerdQAxe firmware; the collector detects which
 one automatically. An optional `pool_provider` (`publicpool` | `ckpool` |
-`braiins` | `generic` | `auto`) overrides pool detection for that one miner.
+`braiins` | `btcpowlab` | `generic` | `auto`) overrides pool detection for that one miner.
 
 An optional `token` is sent as `Authorization: Bearer <token>` on every request
 to that miner. This is for miners behind a monitoring security contract, such as
@@ -82,7 +82,7 @@ pool:
 
 - `auto` detects the provider per miner from its stratum host, and falls back to
   `generic` for anything unrecognised. Best for a mixed fleet.
-- `publicpool`, `ckpool`, `braiins` force that provider for all miners without
+- `publicpool`, `ckpool`, `braiins`, `btcpowlab` force that provider for all miners without
   their own override.
 - `generic` derives stats from each miner's own telemetry (hashrate, shares,
   best share) with no external API. This is also the automatic fallback for an
@@ -90,7 +90,7 @@ pool:
 - `none` hides the pool panel; `demo` simulates it.
 
 Per miner, `pool_provider` overrides the default (see the miners section).
-`base_url` applies to Public Pool; ckpool and Braiins use their own defaults.
+`base_url` applies to Public Pool; ckpool, Braiins and BTC PoW Lab use their own defaults.
 `token` is required only for Braiins; it is read from this file and never sent to
 the admin API or the browser.
 
