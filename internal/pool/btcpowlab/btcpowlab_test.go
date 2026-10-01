@@ -12,9 +12,9 @@ import (
 
 func TestFetchNormalisesMinerAndPoolStats(t *testing.T) {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/public/v1/miner/bc1qtest", func(w http.ResponseWriter, _ *http.Request) {
+	mux.HandleFunc("/public/v1/miner/bc1qtest/summary", func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		_, _ = w.Write([]byte(`{"hashrate_5m_hs":1250000000000,"accepted_shares":42,"rejected":3,"best_share_difficulty":"12345.5","last_share_at":1790559888.25,"workers_online":1,"workers":[{"name":"gamma","hashrate_5m_hs":1250000000000,"last_share_at":1790559888.25}]}`))
+		_, _ = w.Write([]byte(`{"hashrate_5m_hs":1250000000000,"accepted_shares":42,"rejected_shares":3,"best_share_difficulty":"12345.5","last_share_at":1790559888.25,"workers":[{"name":"gamma","hashrate_5m_hs":1250000000000,"last_share_at":1790559888.25}]}`))
 	})
 	mux.HandleFunc("/public/v1/pool", func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "application/json")

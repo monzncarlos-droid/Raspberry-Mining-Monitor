@@ -61,10 +61,9 @@ func (a *Adapter) Capabilities() pool.Capabilities {
 type minerResp struct {
 	Hashrate5mHS        float64  `json:"hashrate_5m_hs"`
 	AcceptedShares      uint64   `json:"accepted_shares"`
-	Rejected            uint64   `json:"rejected"`
+	Rejected            uint64   `json:"rejected_shares"`
 	BestShareDifficulty string   `json:"best_share_difficulty"`
 	LastShareAt         *float64 `json:"last_share_at"`
-	WorkersOnline       int      `json:"workers_online"`
 	Workers             []struct {
 		Name         string   `json:"name"`
 		Hashrate5mHS float64  `json:"hashrate_5m_hs"`
@@ -122,7 +121,7 @@ func (a *Adapter) Fetch(ctx context.Context, in pool.Input) (pool.Snapshot, erro
 		hashrate += m.Hashrate5mHS / hsPerTHs
 		accepted += m.AcceptedShares
 		rejected += m.Rejected
-		active += m.WorkersOnline
+		active += len(m.Workers)
 		if value, ok := parseFloat(m.BestShareDifficulty); ok && (!haveBest || value > best) {
 			best, haveBest = value, true
 		}
@@ -165,7 +164,7 @@ func (a *Adapter) Fetch(ctx context.Context, in pool.Input) (pool.Snapshot, erro
 }
 
 func (a *Adapter) fetchAddress(ctx context.Context, m pool.Miner) addrResult {
-	status, body, err := a.get(ctx, "/public/v1/miner/"+url.PathEscape(m.Address))
+	status, body, err := a.get(ctx, "/public/v1/miner/"+url.PathEscape(m.Address)+"/summary")
 	if err != nil {
 		return addrResult{miner: m, err: err}
 	}
